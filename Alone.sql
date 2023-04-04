@@ -72,6 +72,34 @@ INSERT INTO `contestant_items` VALUES (0,1,1),(0,2,1),(0,3,1),(0,4,1),(0,5,1),(0
 UNLOCK TABLES;
 
 --
+-- Table structure for table `contestant_origins`
+--
+
+DROP TABLE IF EXISTS `contestant_origins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `contestant_origins` (
+  `Origin_ID` int NOT NULL,
+  `City` varchar(40) NOT NULL,
+  `State/Province` varchar(40) NOT NULL,
+  `Country` varchar(40) NOT NULL,
+  `Avg_Winter_Low` int DEFAULT NULL,
+  PRIMARY KEY (`Origin_ID`),
+  KEY `Origin_ID_UNIQUE` (`Origin_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contestant_origins`
+--
+
+LOCK TABLES `contestant_origins` WRITE;
+/*!40000 ALTER TABLE `contestant_origins` DISABLE KEYS */;
+INSERT INTO `contestant_origins` VALUES (1,'Blairsville','Georgia','United States',27),(2,'Lincoln','Nebraska','United States',17),(3,'Bellingham','Massachusetts','United States',16),(4,'Quasqueton','Iowa','United States',13),(5,'Pittsburgh','Pennsylvania','United States',24),(6,'Albemarle','North Carolina','United States',32),(7,'Saint John','New Brunswick','Canada',13),(8,'Windsor','Ontario','Canada',20),(9,'Umatilla','Florida','United States',48),(10,'Jackson','Ohio','United States',23),(11,'Kentwood','Michigan','United States',19),(12,'Rush City','Minnesota','United States',5),(13,'Santa Pola','Valencia','Spain',45),(14,'Portland','Oregon','United States',37),(15,'Augusta','Georgia','United States',41),(16,'Boulder','Utah','United States',20),(17,'Lewis','Colorado','United States',19),(18,'Aiken','South Carolina','United States',34),(19,'Homer','Alaska','United States',20),(20,'Coolidge','Arizona','United States',36),(21,'Appleton','Maine','United States',15),(22,'Edna Bay','Alaska','United States',32),(23,'Port McNeill','British Columbia','Canada',35),(24,'Salt Lake City','Utah','United States',28),(25,'Lopez Island','Washington','United States',35),(26,'Canal Flats','British Columbia','Canada',11),(27,'Mahanoy City','Pennsylvania','United States',19),(28,'Mantua','Ohio','United States',24),(29,'Caledon','Ontario','Canada',14),(30,'Langhorne','Pennsylvania','United States',20),(31,'Fox','Alaska','United States',-6),(32,'Skowhegan','Maine','United States',7),(33,'Raymond','Washington','United States',35),(34,'Fox Lake','Illinois','United States',16),(35,'Anchorage','Alaska','United States',16),(36,'Lynchburg','Virginia','United States',25),(37,'Grass Valley','California','United States',33),(38,'Fort Collins','Colorado','United States',18),(39,'Echo Bay','British Columbia','Canada',33),(40,'Mullingar','Saskatchewan','Canada',-6),(41,'San Antonio','Texas','United States',41),(42,'Vancouver','Washington','United States',35),(43,'Monument','Colorado','United States',17),(44,'Lubbock','Texas','United States',28),(45,'Red Devil','Alaska','United States',35),(46,'Flathead Valley','Montana','United States',35),(47,'Espanola','Ontario','Canada',35),(48,'Indianapolis','Indiana','United States',35),(49,'Redding','California','United States',37),(50,'Sisters','Oregon','United States',21),(51,'Sturgis','Kentucky','United States',26),(52,'Plattsmouth','Nebraska','United States',20),(53,'Henry','Tennessee','United States',27),(54,'Kendrick','Idaho','United States',37),(55,'Otis','Oregon','United States',38),(56,'Exeter','England','United Kingdom',37),(57,'Inian Islands','Alaska','United States',28),(58,'Wellsboro','Pennsylvania','United States',18),(59,'East Jordan','Michigan','United States',16),(60,'St. Croix','US Virgin Islands','U.S. Virgin Islands',71),(61,'Cherryfield','Maine','United States',12),(62,'Oak Ridge','Tennessee','United States',30),(63,'Laramie','Wyoming','United States',9),(64,'Pinawa','Manitoba','Canada',-4),(65,'Sandpoint','Idaho','United States',23),(66,'Montreal','Quebec','Canada',14),(67,'Fayetteville','Arkansas','United States',27),(68,'Pagosa Springs','Colorado','United States',6),(69,'Earlysville','Virginia','United States',30),(70,'Bellevue','Idaho','United States',15),(71,'Juneau','Alaska','United States',27);
+/*!40000 ALTER TABLE `contestant_origins` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `contestants`
 --
 
@@ -87,14 +115,11 @@ CREATE TABLE `contestants` (
   `Kids` varchar(3) NOT NULL,
   `Origin_ID` int NOT NULL,
   `Season_ID` int NOT NULL,
-  `Reason_ID` int NOT NULL,
   PRIMARY KEY (`Contestant_ID`),
   UNIQUE KEY `Contestant_ID_UNIQUE` (`Contestant_ID`),
-  KEY `Reason_ID_idx` (`Reason_ID`) /*!80000 INVISIBLE */,
   KEY `Origin_ID_idx` (`Origin_ID`),
   KEY `Season_ID` (`Season_ID`),
-  CONSTRAINT `Origin_ID` FOREIGN KEY (`Origin_ID`) REFERENCES `origins` (`Origin_ID`),
-  CONSTRAINT `Reason_ID` FOREIGN KEY (`Reason_ID`) REFERENCES `reasons` (`Reason_ID`),
+  CONSTRAINT `Origin_ID` FOREIGN KEY (`Origin_ID`) REFERENCES `contestant_origins` (`Origin_ID`),
   CONSTRAINT `Season_ID` FOREIGN KEY (`Season_ID`) REFERENCES `seasons` (`Season_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -105,7 +130,7 @@ CREATE TABLE `contestants` (
 
 LOCK TABLES `contestants` WRITE;
 /*!40000 ALTER TABLE `contestants` DISABLE KEYS */;
-INSERT INTO `contestants` VALUES (0,'Alan Kay',40,'Male','Yes','Yes',1,1,1),(1,'Sam Larson',22,'Male','Yes','Yes',2,1,2),(2,'Mitch Mitchell',34,'Male','Yes','Yes',3,1,3),(3,'Lucas Miller',32,'Male','Yes','No',4,1,4),(4,'Dustin Feher',37,'Male','Yes','No',5,1,5),(5,'Brant McGee',44,'Male','Yes','Yes',6,1,6),(6,'Wayne Russell',46,'Male','Yes','Yes',7,1,7),(7,'Joe Robinet',24,'Male','Yes','Yes',8,1,8),(8,'Chris Weatherman',41,'Male','Yes','Yes',9,1,9),(9,'Josh Chavez',31,'Male','Yes','Yes',10,1,7),(10,'David McIntyre',50,'Male','No','Yes',11,2,1),(11,'Larry Roberts',44,'Male','Yes','Yes',12,2,10),(12,'Jose Martinez Amoedo',45,'Male','Yes','Yes',13,2,11),(13,'Nicole Apelian',45,'Female','Yes','Yes',14,2,12),(14,'Justin Vititoe',35,'Male','No','No',15,2,13),(15,'Randy Champagne',28,'Male','No','No',16,2,14),(16,'Mike Lowe',55,'Male','No','No',17,2,15),(17,'Tracy Wilson',44,'Female','No','Yes',18,2,16),(18,'Mary Kate Green',36,'Female','No','Yes',19,2,17),(19,'Desmond White',37,'Male','No','No',20,2,7),(20,'Zachary Fowler',36,'Male','Yes','Yes',21,3,1),(21,'Carleigh Fairchild',28,'Female','No','No',22,3,18),(22,'Megan Hanacek',41,'Female','Yes','Yes',23,3,19),(23,'Dave Nessia',49,'Male','No','No',24,3,20),(24,'Callie North',27,'Female','No','No',25,3,21),(25,'Greg Ovens',53,'Male','No','Yes',26,3,22),(26,'Dan Wowak',34,'Male','Yes','Yes',27,3,23),(27,'Britt Ahart',40,'Male','No','Yes',28,3,23),(28,'Zachary Gault',22,'Male','No','No',29,3,24),(29,'Jim Shields',37,'Male','Yes','No',30,3,25),(30,'Sam Larson',24,'Male','Yes','Yes',2,5,1),(31,'Britt Ahart',41,'Male','No','Yes',28,5,26),(32,'Larry Roberts',46,'Male','Yes','Yes',12,5,26),(33,'Dave Nessia',50,'Male','No','No',24,5,27),(34,'Randy Champagne',31,'Male','No','No',16,5,28),(35,'Brooke Whipple',45,'Female','Yes','Yes',31,5,28),(36,'Jesse Bosdell',32,'Male','No','No',32,5,29),(37,'Nicole Apelian',47,'Female','Yes','Yes',33,5,30),(38,'Brad Richardson',24,'Male','No','No',34,5,31),(39,'Carleigh Fairchild',30,'Female','No','No',35,5,32),(40,'Jordan Jonas',35,'Male','Yes','No',36,6,1),(41,'Woniya Thibeault',42,'Female','No','No',37,6,33),(42,'Nathan Donnelly',39,'Male','Yes','No',25,6,34),(43,'Barry Karcher',39,'Male','Yes','Yes',38,6,35),(44,'Nikki van Schyndel',44,'Female','No','No',39,6,36),(45,'Michelle Wohlberg',31,'Female','Yes','Yes',40,6,37),(46,'Brady Nicholls',36,'Male','Yes','Yes',41,6,26),(47,'Ray Livingston',43,'Male','Yes','Yes',42,6,38),(48,'Donny Dust',38,'Male','Yes','Yes',43,6,39),(49,'Tim Backus',55,'Male','No','Yes',44,6,40),(50,'Roland Welker',47,'Male','No','No',45,7,1),(51,'Callie Russell',31,'Female','No','No',46,7,41),(52,'Kielyn Marrone',33,'Female','Yes','No',47,7,33),(53,'Amós Rodriguez',40,'Male','No','No',48,7,33),(54,'Mark D\'Ambrosio',33,'Male','No ','Yes',42,7,42),(55,'Joe Nicholas',31,'Male','No','No',49,7,33),(56,'Joel Van Der Loon',34,'Male','Yes','Yes',50,7,33),(57,'Keith Syers',45,'Male','Yes','Yes',51,7,43),(58,'Correy Hawk',30,'Male','No','No',52,7,44),(59,'Shawn Helton',43,'Male','Yes','Yes',53,7,8),(60,'Clay Hayes',40,'Male','Yes','Yes',54,8,1),(61,'Biko Wright',29,'Male','Yes','Yes',55,8,45),(62,'Theresa Emmerich Kamper',40,'Female','No','No',56,8,36),(63,'Colter Barnes',36,'Male','No','No',57,8,36),(64,'Rose Anna Moore',43,'Female','No','Yes',58,8,46),(65,'Nate Weber',47,'Male','Yes','Yes',59,8,39),(66,'Matt Corradino',42,'Male','Yes','Yes',60,8,47),(67,'Michelle Finn',46,'Female','Yes','No',61,8,33),(68,'Jordon Bell',43,'Male','Yes','Yes',62,8,26),(69,'Tim Madsen',48,'Male','No','No',63,8,48),(70,'Juan Pablo Quiñonez',30,'Male','Yes','No',64,9,1),(71,'Karie Lee Knoke',57,'Female','Yes','No',65,9,49),(72,'Teimojin Tan',31,'Male','No','No',66,9,50),(73,'Adam Riley',36,'Male','Yes','No',67,9,33),(74,'Jessie Krebs',49,'Female','Yes','No',68,9,51),(75,'Tom Garstang',35,'Male','Yes','No',69,9,52),(76,'Terry Burns',30,'Male','No','No',19,9,53),(77,'Benji Hill',46,'Male','Yes','Yes',70,9,54),(78,'Igor Limansky',39,'Male','Yes','No',24,9,55),(79,'Jacques Turcotte',23,'Male','Yes','No',71,9,26);
+INSERT INTO `contestants` VALUES (0,'Alan Kay',40,'Male','Yes','Yes',1,1),(1,'Sam Larson',22,'Male','Yes','Yes',2,1),(2,'Mitch Mitchell',34,'Male','Yes','Yes',3,1),(3,'Lucas Miller',32,'Male','Yes','No',4,1),(4,'Dustin Feher',37,'Male','Yes','No',5,1),(5,'Brant McGee',44,'Male','Yes','Yes',6,1),(6,'Wayne Russell',46,'Male','Yes','Yes',7,1),(7,'Joe Robinet',24,'Male','Yes','Yes',8,1),(8,'Chris Weatherman',41,'Male','Yes','Yes',9,1),(9,'Josh Chavez',31,'Male','Yes','Yes',10,1),(10,'David McIntyre',50,'Male','No','Yes',11,2),(11,'Larry Roberts',44,'Male','Yes','Yes',12,2),(12,'Jose Martinez Amoedo',45,'Male','Yes','Yes',13,2),(13,'Nicole Apelian',45,'Female','Yes','Yes',14,2),(14,'Justin Vititoe',35,'Male','No','No',15,2),(15,'Randy Champagne',28,'Male','No','No',16,2),(16,'Mike Lowe',55,'Male','No','No',17,2),(17,'Tracy Wilson',44,'Female','No','Yes',18,2),(18,'Mary Kate Green',36,'Female','No','Yes',19,2),(19,'Desmond White',37,'Male','No','No',20,2),(20,'Zachary Fowler',36,'Male','Yes','Yes',21,3),(21,'Carleigh Fairchild',28,'Female','No','No',22,3),(22,'Megan Hanacek',41,'Female','Yes','Yes',23,3),(23,'Dave Nessia',49,'Male','No','No',24,3),(24,'Callie North',27,'Female','No','No',25,3),(25,'Greg Ovens',53,'Male','No','Yes',26,3),(26,'Dan Wowak',34,'Male','Yes','Yes',27,3),(27,'Britt Ahart',40,'Male','No','Yes',28,3),(28,'Zachary Gault',22,'Male','No','No',29,3),(29,'Jim Shields',37,'Male','Yes','No',30,3),(30,'Sam Larson',24,'Male','Yes','Yes',2,5),(31,'Britt Ahart',41,'Male','No','Yes',28,5),(32,'Larry Roberts',46,'Male','Yes','Yes',12,5),(33,'Dave Nessia',50,'Male','No','No',24,5),(34,'Randy Champagne',31,'Male','No','No',16,5),(35,'Brooke Whipple',45,'Female','Yes','Yes',31,5),(36,'Jesse Bosdell',32,'Male','No','No',32,5),(37,'Nicole Apelian',47,'Female','Yes','Yes',33,5),(38,'Brad Richardson',24,'Male','No','No',34,5),(39,'Carleigh Fairchild',30,'Female','No','No',35,5),(40,'Jordan Jonas',35,'Male','Yes','No',36,6),(41,'Woniya Thibeault',42,'Female','No','No',37,6),(42,'Nathan Donnelly',39,'Male','Yes','No',25,6),(43,'Barry Karcher',39,'Male','Yes','Yes',38,6),(44,'Nikki van Schyndel',44,'Female','No','No',39,6),(45,'Michelle Wohlberg',31,'Female','Yes','Yes',40,6),(46,'Brady Nicholls',36,'Male','Yes','Yes',41,6),(47,'Ray Livingston',43,'Male','Yes','Yes',42,6),(48,'Donny Dust',38,'Male','Yes','Yes',43,6),(49,'Tim Backus',55,'Male','No','Yes',44,6),(50,'Roland Welker',47,'Male','No','No',45,7),(51,'Callie Russell',31,'Female','No','No',46,7),(52,'Kielyn Marrone',33,'Female','Yes','No',47,7),(53,'Amós Rodriguez',40,'Male','No','No',48,7),(54,'Mark D\'Ambrosio',33,'Male','No ','Yes',42,7),(55,'Joe Nicholas',31,'Male','No','No',49,7),(56,'Joel Van Der Loon',34,'Male','Yes','Yes',50,7),(57,'Keith Syers',45,'Male','Yes','Yes',51,7),(58,'Correy Hawk',30,'Male','No','No',52,7),(59,'Shawn Helton',43,'Male','Yes','Yes',53,7),(60,'Clay Hayes',40,'Male','Yes','Yes',54,8),(61,'Biko Wright',29,'Male','Yes','Yes',55,8),(62,'Theresa Emmerich Kamper',40,'Female','No','No',56,8),(63,'Colter Barnes',36,'Male','No','No',57,8),(64,'Rose Anna Moore',43,'Female','No','Yes',58,8),(65,'Nate Weber',47,'Male','Yes','Yes',59,8),(66,'Matt Corradino',42,'Male','Yes','Yes',60,8),(67,'Michelle Finn',46,'Female','Yes','No',61,8),(68,'Jordon Bell',43,'Male','Yes','Yes',62,8),(69,'Tim Madsen',48,'Male','No','No',63,8),(70,'Juan Pablo Quiñonez',30,'Male','Yes','No',64,9),(71,'Karie Lee Knoke',57,'Female','Yes','No',65,9),(72,'Teimojin Tan',31,'Male','No','No',66,9),(73,'Adam Riley',36,'Male','Yes','No',67,9),(74,'Jessie Krebs',49,'Female','Yes','No',68,9),(75,'Tom Garstang',35,'Male','Yes','No',69,9),(76,'Terry Burns',30,'Male','No','No',19,9),(77,'Benji Hill',46,'Male','Yes','Yes',70,9),(78,'Igor Limansky',39,'Male','Yes','No',24,9),(79,'Jacques Turcotte',23,'Male','Yes','No',71,9);
 /*!40000 ALTER TABLE `contestants` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +143,7 @@ DROP TABLE IF EXISTS `experience_descriptions`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `experience_descriptions` (
   `Experience_ID` int NOT NULL,
-  `Experiences` varchar(40) NOT NULL,
+  `Description` varchar(40) NOT NULL,
   PRIMARY KEY (`Experience_ID`),
   KEY `Experience_ID_UNIQUE` (`Experience_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -143,7 +168,7 @@ DROP TABLE IF EXISTS `item_descriptions`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `item_descriptions` (
   `Item_ID` int NOT NULL,
-  `Items` varchar(30) NOT NULL,
+  `Description` varchar(30) NOT NULL,
   PRIMARY KEY (`Item_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -159,58 +184,28 @@ INSERT INTO `item_descriptions` VALUES (1,'Saw'),(2,'Sleeping bag'),(3,'Pot'),(4
 UNLOCK TABLES;
 
 --
--- Table structure for table `origins`
+-- Table structure for table `reason_descriptions`
 --
 
-DROP TABLE IF EXISTS `origins`;
+DROP TABLE IF EXISTS `reason_descriptions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `origins` (
-  `Origin_ID` int NOT NULL,
-  `City` varchar(40) NOT NULL,
-  `State/Province` varchar(40) NOT NULL,
-  `Country` varchar(40) NOT NULL,
-  `Avg_Winter_Low` int DEFAULT NULL,
-  PRIMARY KEY (`Origin_ID`),
-  KEY `Origin_ID_UNIQUE` (`Origin_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `origins`
---
-
-LOCK TABLES `origins` WRITE;
-/*!40000 ALTER TABLE `origins` DISABLE KEYS */;
-INSERT INTO `origins` VALUES (1,'Blairsville','Georgia','United States',27),(2,'Lincoln','Nebraska','United States',17),(3,'Bellingham','Massachusetts','United States',16),(4,'Quasqueton','Iowa','United States',13),(5,'Pittsburgh','Pennsylvania','United States',24),(6,'Albemarle','North Carolina','United States',32),(7,'Saint John','New Brunswick','Canada',13),(8,'Windsor','Ontario','Canada',20),(9,'Umatilla','Florida','United States',48),(10,'Jackson','Ohio','United States',23),(11,'Kentwood','Michigan','United States',19),(12,'Rush City','Minnesota','United States',5),(13,'Santa Pola','Valencia','Spain',45),(14,'Portland','Oregon','United States',37),(15,'Augusta','Georgia','United States',41),(16,'Boulder','Utah','United States',20),(17,'Lewis','Colorado','United States',19),(18,'Aiken','South Carolina','United States',34),(19,'Homer','Alaska','United States',20),(20,'Coolidge','Arizona','United States',36),(21,'Appleton','Maine','United States',15),(22,'Edna Bay','Alaska','United States',32),(23,'Port McNeill','British Columbia','Canada',35),(24,'Salt Lake City','Utah','United States',28),(25,'Lopez Island','Washington','United States',35),(26,'Canal Flats','British Columbia','Canada',11),(27,'Mahanoy City','Pennsylvania','United States',19),(28,'Mantua','Ohio','United States',24),(29,'Caledon','Ontario','Canada',14),(30,'Langhorne','Pennsylvania','United States',20),(31,'Fox','Alaska','United States',-6),(32,'Skowhegan','Maine','United States',7),(33,'Raymond','Washington','United States',35),(34,'Fox Lake','Illinois','United States',16),(35,'Anchorage','Alaska','United States',16),(36,'Lynchburg','Virginia','United States',25),(37,'Grass Valley','California','United States',33),(38,'Fort Collins','Colorado','United States',18),(39,'Echo Bay','British Columbia','Canada',33),(40,'Mullingar','Saskatchewan','Canada',-6),(41,'San Antonio','Texas','United States',41),(42,'Vancouver','Washington','United States',35),(43,'Monument','Colorado','United States',17),(44,'Lubbock','Texas','United States',28),(45,'Red Devil','Alaska','United States',35),(46,'Flathead Valley','Montana','United States',35),(47,'Espanola','Ontario','Canada',35),(48,'Indianapolis','Indiana','United States',35),(49,'Redding','California','United States',37),(50,'Sisters','Oregon','United States',21),(51,'Sturgis','Kentucky','United States',26),(52,'Plattsmouth','Nebraska','United States',20),(53,'Henry','Tennessee','United States',27),(54,'Kendrick','Idaho','United States',37),(55,'Otis','Oregon','United States',38),(56,'Exeter','England','United Kingdom',37),(57,'Inian Islands','Alaska','United States',28),(58,'Wellsboro','Pennsylvania','United States',18),(59,'East Jordan','Michigan','United States',16),(60,'St. Croix','US Virgin Islands','U.S. Virgin Islands',71),(61,'Cherryfield','Maine','United States',12),(62,'Oak Ridge','Tennessee','United States',30),(63,'Laramie','Wyoming','United States',9),(64,'Pinawa','Manitoba','Canada',-4),(65,'Sandpoint','Idaho','United States',23),(66,'Montreal','Quebec','Canada',14),(67,'Fayetteville','Arkansas','United States',27),(68,'Pagosa Springs','Colorado','United States',6),(69,'Earlysville','Virginia','United States',30),(70,'Bellevue','Idaho','United States',15),(71,'Juneau','Alaska','United States',27);
-/*!40000 ALTER TABLE `origins` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `reasons`
---
-
-DROP TABLE IF EXISTS `reasons`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reasons` (
+CREATE TABLE `reason_descriptions` (
   `Reason_ID` int NOT NULL,
-  `Reason_text` varchar(50) NOT NULL,
-  `Reason` varchar(20) NOT NULL,
-  `Sub_Reason` varchar(20) NOT NULL,
+  `Description` text NOT NULL,
   PRIMARY KEY (`Reason_ID`),
   KEY `Reason_ID_UNIQUE` (`Reason_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `reasons`
+-- Dumping data for table `reason_descriptions`
 --
 
-LOCK TABLES `reasons` WRITE;
-/*!40000 ALTER TABLE `reasons` DISABLE KEYS */;
-INSERT INTO `reasons` VALUES (1,'Victor','Won','Won'),(2,'Lost the mind game / Pregnant wife','Mental','Lonely'),(3,'Dying mother','Mental','Lonely'),(4,'Felt content with what he had done','Mental','Content'),(5,'Fear of storm','Mental','Fear'),(6,'Consuming salt water','Inexperience','Illness'),(7,'Fear of bears','Mental','Fear'),(8,'Lost fire starter','Mistake','Cold'),(9,'Fear of wolves','Mental','Fear'),(10,'Hunger and mental breakdown','Environment','Food'),(11,'Fell off kayak into river','Mistake','Cold'),(12,'Missed her kids','Mental','Lonely'),(13,'Had nothing left to accomplish','Mental','Content'),(14,'Didn\'t like being alone','Mental','Lonely'),(15,'Missed his wife','Mental','Lonely'),(16,'Didn\'t want to hurt a bear/cub','Mental','Fear'),(17,'Split tendon with axe','Mistake','Injury'),(18,'BMI too low','Environment','Food'),(19,'2 broken teeth(molars), jaw pain','Mistake','Injury'),(20,'Systolic pressure too low','Environment','Food'),(21,'Felt like journey was complete','Mental','Content'),(22,'Hypothermia','Environment','Cold'),(23,'Missed family','Mental','Lonely'),(24,'Cut arm with axe','Mistake','Injury'),(25,'Regretted leaving family','Mental','Lonely'),(26,'Missed his family','Mental','Lonely'),(27,'Just felt \"right\"\"\"','Mental','Content'),(28,'Lonely','Mental','Lonely'),(29,'Constipation, possible fecal impaction','Inexperience','Illness'),(30,'MS attack','Pre-existing Health','Illness'),(31,'Had no food the whole time','Inexperience','Food'),(32,'Fish hook in hand','Mistake','Injury'),(33,'Starvation','Environment','Food'),(34,'Shelter fire','Mistake','Fire'),(35,'Lost too much weight','Environment','Food'),(36,'Low BMI, lost too much weight','Environment','Food'),(37,'Constipation, possible impacted bowel','Environment','Illness'),(38,'Nothing left to give','Environment','Food'),(39,'Food poisoning','Mistake','Injury'),(40,'Broken ankle','Mistake','Injury'),(41,'Frostbite of the toes','Environment','Cold'),(42,'Effects of trichinosis infection','Mistake','Injury'),(43,'Food poisoning, infection','Mistake','Injury'),(44,'Torn Meniscus, partially torn MCL','Mistake','Injury'),(45,'Starvation, heart palpitations','Environment','Food'),(46,'Frostbite, malnutrition','Environment','Injury'),(47,'Missed his family, starvation','Mental','Lonely'),(48,'Anxiety attack, chest pains','Pre-existing Health','Injury'),(49,'Felt too weak, exhaustion','Environment','Food'),(50,'Missed his family; journey complete','Mental','Lonely'),(51,'Exhaustion, Spent a month on shelter with no food','Mistake','Food'),(52,'Starvation leading to repeated falls','Environment','Injury'),(53,'Starvation, Possible parasites','Environment','Food'),(54,'Giardia Infection','Mistake','Injury'),(55,'Heart palipations, Exhaustion','Inexperience','Food');
-/*!40000 ALTER TABLE `reasons` ENABLE KEYS */;
+LOCK TABLES `reason_descriptions` WRITE;
+/*!40000 ALTER TABLE `reason_descriptions` DISABLE KEYS */;
+INSERT INTO `reason_descriptions` VALUES (1,'Victor'),(2,'Missed family, hunger'),(3,'Missed family'),(4,'No desire to stay'),(5,'Fear of weather'),(6,'Consumed unsafe water'),(7,'Fear of wild animals'),(8,'Lost fire starter'),(9,'Fell into cold water'),(10,'Injury with sharp object'),(11,'BMI too low; evacuated'),(12,'Broke multiple teeth'),(13,'Too cold / hypothermia'),(14,'Constipation due to poor diet'),(15,'Pre-existing Illness'),(16,'Unable to find food'),(17,'Shelter fire'),(18,'Consumed unsafe food'),(19,'Injury from fall'),(20,'Frostbite, malnutrition'),(21,'Illness/injury caused by malnutrition');
+/*!40000 ALTER TABLE `reason_descriptions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -222,11 +217,14 @@ DROP TABLE IF EXISTS `results`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `results` (
   `Contestant_ID` int NOT NULL,
+  `Reason_ID` int NOT NULL,
   `Season` int NOT NULL,
   `Position` int NOT NULL,
   `Duration` int NOT NULL,
-  KEY `Contestant_ID_UNIQUE` (`Contestant_ID`),
-  CONSTRAINT `Res_Contestant_ID` FOREIGN KEY (`Contestant_ID`) REFERENCES `contestants` (`Contestant_ID`)
+  UNIQUE KEY `Contestant_ID_UNIQUE` (`Contestant_ID`),
+  KEY `Res_Reason_ID_idx` (`Reason_ID`),
+  CONSTRAINT `Res_Contestant_ID` FOREIGN KEY (`Contestant_ID`) REFERENCES `contestants` (`Contestant_ID`),
+  CONSTRAINT `Res_Reason_ID` FOREIGN KEY (`Reason_ID`) REFERENCES `reason_descriptions` (`Reason_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -236,7 +234,7 @@ CREATE TABLE `results` (
 
 LOCK TABLES `results` WRITE;
 /*!40000 ALTER TABLE `results` DISABLE KEYS */;
-INSERT INTO `results` VALUES (0,1,1,56),(1,1,2,55),(2,1,3,43),(3,1,4,39),(4,1,5,8),(5,1,6,6),(6,1,7,4),(7,1,8,4),(8,1,9,1),(9,1,10,0),(10,2,1,66),(11,2,2,64),(12,2,3,59),(13,2,4,57),(14,2,5,35),(15,2,6,21),(16,2,7,21),(17,2,8,8),(18,2,9,7),(19,2,10,0),(20,3,1,87),(21,3,2,86),(22,3,3,78),(23,3,4,73),(24,3,5,72),(25,3,6,51),(26,3,7,51),(27,3,8,35),(28,3,9,8),(29,3,10,2),(30,5,1,60),(31,5,2,56),(32,5,3,41),(33,5,4,36),(34,5,5,35),(35,5,6,28),(36,5,7,24),(37,5,8,9),(38,5,9,7),(39,5,10,5),(40,6,1,77),(41,6,2,73),(42,6,3,72),(43,6,4,69),(44,6,5,52),(45,6,6,48),(46,6,7,32),(47,6,8,19),(48,6,9,8),(49,6,10,4),(50,7,1,100),(51,7,2,89),(52,7,3,80),(53,7,4,58),(54,7,5,44),(55,7,6,44),(56,7,7,40),(57,7,8,22),(58,7,9,12),(59,7,10,10),(60,8,1,74),(61,8,2,73),(62,8,3,69),(63,8,4,67),(64,8,5,37),(65,8,6,24),(66,8,7,22),(67,8,8,21),(68,8,9,19),(69,8,10,6),(70,9,1,78),(71,9,2,75),(72,9,3,63),(73,9,4,52),(74,9,5,46),(75,9,6,43),(76,9,7,42),(77,9,8,27),(78,9,9,20),(79,9,10,15);
+INSERT INTO `results` VALUES (0,1,1,1,56),(1,2,1,2,55),(2,3,1,3,43),(3,4,1,4,39),(4,5,1,5,8),(5,6,1,6,6),(6,7,1,7,4),(7,8,1,8,4),(8,7,1,9,2),(9,7,1,10,1),(10,1,2,1,66),(11,2,2,2,64),(12,9,2,3,59),(13,3,2,4,57),(14,4,2,5,35),(15,3,2,6,21),(16,3,2,7,21),(17,7,2,8,8),(18,10,2,9,7),(19,7,2,10,0),(20,1,3,1,87),(21,11,3,2,86),(22,12,3,3,78),(23,11,3,4,73),(24,4,3,5,72),(25,13,3,6,51),(26,3,3,7,51),(27,3,3,8,35),(28,10,3,9,8),(29,3,3,10,2),(30,1,5,1,60),(31,3,5,2,56),(32,3,5,3,41),(33,4,5,4,36),(34,3,5,5,35),(35,3,5,6,28),(36,14,5,7,24),(37,15,5,8,9),(38,16,5,9,7),(39,10,5,10,5),(40,1,6,1,77),(41,16,6,2,73),(42,17,6,3,72),(43,11,6,4,69),(44,11,6,5,52),(45,14,6,6,48),(46,3,6,7,32),(47,16,6,8,19),(48,18,6,9,8),(49,19,6,10,4),(50,1,7,1,100),(51,20,7,2,89),(52,16,7,3,80),(53,16,7,4,58),(54,18,7,5,44),(55,16,7,6,44),(56,16,7,7,40),(57,18,7,8,22),(58,19,7,9,12),(59,8,7,10,10),(60,1,8,1,74),(61,16,8,2,73),(62,11,8,3,69),(63,11,8,4,67),(64,20,8,5,37),(65,18,8,6,24),(66,2,8,7,22),(67,16,8,8,21),(68,3,8,9,19),(69,21,8,10,6),(70,1,9,1,78),(71,21,9,2,75),(72,3,9,3,63),(73,16,9,4,52),(74,16,9,5,46),(75,21,9,6,43),(76,18,9,7,42),(77,18,9,8,27),(78,21,9,9,20),(79,3,9,10,15);
 /*!40000 ALTER TABLE `results` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-02 15:19:06
+-- Dump completed on 2023-04-03 17:33:43
