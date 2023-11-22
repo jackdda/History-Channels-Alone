@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3SPTRRYP9H"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-3SPTRRYP9H');
+		</script>
+		<title>Jack Didier's Portfolio</title>
+		<meta property="og:image" content="https://i.ibb.co/xDLVX2C/Data-Analyst.jpg" />
+		<meta property="og:type" content="blog" />
+		<meta property="og:url" content="https://jackdda.github.io/" />
+		<title>Jack Didier's Portfolio</title>
+		<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Jack Didier</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">Portfolio</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="Resume.html">Resume</a></li>
+						</ul>
+						<ul class="icons">
+							<li>
+								<a href="https://www.linkedin.com/in/jackdda/" class="icon brands alt fa-linkedin"
+								  ><span class="label">LinkedIn</span></a
+								>
+							  </li>
+							  <li>
+								<a href="https://public.tableau.com/app/profile/jack.didier" class="label">	<iconify-icon icon="ion:logo-tableau"></iconify-icon></a></li>
+							  </li>
+							  <li>
+								<a href="https://github.com/jackdda" class="icon brands alt fa-github"
+								  ><span class="label">GitHub</span></a
+								>
+							  </li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">                                
+								<header class="major">
+									<h1>History Channel's ALone</h1>
+									<div class="image-caption"><p style="text-align:center"><em>
+                                        Complete data in CSV, XLSX, and SQL format available <a href="https://github.com/jackdda/History-Channels-Alone">here</a> <br>
+                                        Tableau presentation <a href="https://public.tableau.com/app/profile/jack.didier/viz/HistoryChannelsAlone/Story1">here</em></a></p></div>
+										
+									<div class="image fitt" ><img src="/images/AloneBanner.jpg" alt="" /></div>
+									<div class="image-caption"><p style="text-align:right"><em>Photo by provided by History Channel</em></p></div>
+								</header>
+								    <h3>Overview</h3>
+                                    <p>Alone is a survival show produced by History that originally aired in June of 2015. Its premise is simple: each season, 10 contestants are left completely alone in a
+                                    wilderness and the contestant that can stay the longest wins $500,000. Unlike most survival shows, there is literally no one else with them - they are even in charge of their own filming.
+                                    Each contestant is subject to sporatic medical checkups, but that is the only time they see another human. They are given 10 items of their choosing (from a pre-approved list), 
+                                    a satellite phone to call if they want to "tap out", about 65lbs of camera gear, and then they are left alone in a remote wilderness. Most of the season locations have been in Canada,
+                                    but there have also been seasons in Mongolia and Pategonia.
+                                    </p>
+									<h3>Collecting data</h3>
+                                    <p>This data came from 3 primary sources: <br>
+                                        1) History.com for contestant biographies and item lists.<br>
+                                        2) Wikipedia.com for season location facts, contestant ranking, and contestant durations.<br>
+                                        3) Alone TV show for miscellaneous facts and clarifications. <br>
+                                    The data was originally collected in an Excel .xlxs file. As the amount of data grew and a necessity for more thorough analysis arose, the data was used to create a 
+                                    .sql database using MySQL Workbench. The data is available in both formats as well as individual .csv files in the above link. </p>
+                                    <div class="image fitt" ><img src="/images/AloneDB Model1.png" alt="" /></div>
+								
+									<h3>Takeaways</h3>	
+									This data, in total, identifies several key takeaways: <br>
+									1) Surprisingly, while all locations were chosen for extraordinary cold, there has been no correlation found between the average duration of a contestant and how warm their home climate is. <br>
+									2) Despite having never won a season, women were found to outperform men in almost every metric with a median duration over two weeks longer than men.  <br>
+									3) While having a partner or not was found to have little bearing on a contestant's average duration, contestants without a child were found to have stayed nearly 10 days longer <br>
+									4) As might be expected, while each season's location has increasingly become more difficult, average contestant duration has also consistantly increased - likely due to a larger talent base. <br>
+									5) Items such as gill nets and snare wires that allow for passive food gathering are associated with longer durations - but are not available in every location. <br>
+
+									<br>
+									<h3>Tableau Presentation of this data</h3>	
+                                    <div class='tableauPlaceholder' id='viz1700684051130' style='position: relative'><noscript><a href='#'><img alt='HISTORY Channel&#39;s Alone - Seasons 1-3 and 5-9 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Hi&#47;HistoryChannelsAlone&#47;Story1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='HistoryChannelsAlone&#47;Story1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Hi&#47;HistoryChannelsAlone&#47;Story1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1700684051130');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                                    <br>
+		<!-- Footer -->
+		<footer id="footer">
+		  <section>
+			<form method="post" id="form">
+			  <!-- this input is not displayed to the user, used to prevent spam -->
+			  <input
+				type="hidden"
+				name="_gotcha"
+				style="display: none !important"
+				id="honeypot"
+			  />
+			  <div class="fields">
+				<div class="field">
+				  <label for="name">Name</label>
+				  <input type="text" name="name" id="name" />
+				</div>
+				<div class="field">
+				  <label for="email">Email</label>
+				  <input type="text" name="email" id="email" />
+				</div>
+				<div class="field">
+				  <label for="message">Message</label>
+				  <textarea name="message" id="message" rows="3"></textarea>
+				</div>
+			  </div>
+			  <ul class="actions">
+				<li>
+				  <input
+					id="formSubmitButton"
+					type="submit"
+					value="Send Message"
+				  />
+				</li>
+			  </ul>
+			</form>
+		  </section>
+		  <section class="split contact">
+			  <section class="alt">
+				  <h3>Email</h3>
+				  <p><a href="mailto: jackdda87@gmail.com">jackdda87@gmail.com</a></p>
+			  </section>
+			  <section>
+				  <h3>Location</h3>
+				  <p>Seattle, WA</p>
+			  </section>
+			<section>
+			  <h3>Social</h3>
+			  <ul class="icons alt">
+				<li>
+				  <a href="https://www.linkedin.com/in/jackdda/" class="icon brands alt fa-linkedin"
+					><span class="label">LinkedIn</span></a
+				  >
+				</li>
+				<li>
+				  <a href="https://public.tableau.com/app/profile/jack.didier" class="label">	<iconify-icon icon="ion:logo-tableau"></iconify-icon></a></li>
+				</li>
+				<li>
+				  <a href="https://github.com/jackdda" class="icon brands alt fa-github"
+					><span class="label">GitHub</span></a
+				  >
+				</li>
+			  </ul>
+			</section>
+		  </section>
+		</footer>
+  
+		<!-- Copyright -->
+		<div id="copyright">
+		  <ul>
+			<li>&copy; Untitled</li>
+			<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+		  </ul>
+		</div>
+	  </div>
+  
+	  <!-- Scripts -->
+	  <script src="assets/js/jquery.min.js"></script>
+	  <script src="assets/js/jquery.scrollex.min.js"></script>
+	  <script src="assets/js/jquery.scrolly.min.js"></script>
+	  <script src="assets/js/browser.min.js"></script>
+	  <script src="assets/js/breakpoints.min.js"></script>
+	  <script src="assets/js/util.js"></script>
+	  <script src="assets/js/main.js"></script>
+	  <script src="assets/js/index.js"></script>
+	  <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>
+	</body>
+  </html>
